@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react'
-
+import React, { useEffect } from "react";
 
 const LoginPage = () => {
-  
+  return <div>LoginPage</div>;
+};
 
-   
-   
-  return (
-    <div>LoginPage</div>
-  )
-}
-
-export default LoginPage
+export default LoginPage;
