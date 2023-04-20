@@ -1,5 +1,5 @@
 # Getting Started with Create React App
 
 Tải file project về và mở 1 new terminal của folder project chạy câu lệnh: 
-# npm i react-router-dom react-redux @reduxjs/toolkit react-slick sass slick-carousel redux @testing-library/jest-dom @testing-library/react @testing-library/user-event react react-dom react-scripts web-vitals
+# npm i react-router-dom react-redux axios redux redux-thunk react-slick sass slick-carousel redux @testing-library/jest-dom @testing-library/react @testing-library/user-event react react-dom react-scripts web-vitals
 để cài đặt cái thư viện bằng nodejs

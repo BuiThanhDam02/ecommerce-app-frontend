@@ -1,4 +1,4 @@
-[{
+export const data = [{
     id: "product1",
     title: "vải bố decor",
     price: 199000,
