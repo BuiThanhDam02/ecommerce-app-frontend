@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 
-export const addToCart = (product) => (dispatch) =>{
-    const carts = useSelector(getAllCarts);
+
+export const addToCart = ({product,carts}) => (dispatch) =>{
+    
     const isItemInCart = carts.find(item => item.id === product.id); 
     if(isItemInCart){
         const tempCart = carts.map(item => {
@@ -26,8 +26,8 @@ export const addToCart = (product) => (dispatch) =>{
     dispatch({type:"UPDATE_CART",data:carts});
 }
 
-export const removeFromCart = (productID) => (dispatch) =>{
-    const carts = useSelector(getAllCarts);
+export const removeFromCart = ({productID,carts}) => (dispatch) =>{
+    
     const tempCart = carts.filter(item => item.id !== productID);
     carts = tempCart;
     dispatch({type:"UPDATE_CART",data:carts});
@@ -38,8 +38,8 @@ export const clearCart = () => (dispatch) =>{
     dispatch({type:"UPDATE_CART",data:carts});
 }
 
-export const getCartTotal = () => (dispatch) =>{
-    const carts = useSelector(getAllCarts);
+export const getCartTotal = ({carts}) => (dispatch) =>{
+    
 
     const totalAmount = carts.reduce((cartTotal, cartItem) => {
         return cartTotal += cartItem.totalPrice
@@ -49,8 +49,8 @@ export const getCartTotal = () => (dispatch) =>{
     dispatch({type:"TOTAL_CART",data:{totalAmount:totalAmount,itemsCount:itemsCount}});
 }
 
-export const toggleCartQty = ({productId, type}) => (dispatch) =>{
-    const carts = useSelector(getAllCarts);
+export const toggleCartQty = ({productId, type,carts}) => (dispatch) =>{
+    
     const tempCart = carts.map(item => {
         if(item.id === productId){
             let tempQty = item.quantity;

@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
-import * as ProductAPI from '../api/ProductRequest';
 
-export const getAllProducts = () => async (dispatch) => {
+import * as ProductAPI from '../api/ProductRequest';
+import {BASE_IMAGE_URL} from "../utils/apiURL";
+
+export const getAllProductsApi = () => async (dispatch) => {
     dispatch({type: "PRODUCT_START"})
     try {
         const { data } = await ProductAPI.getAllProducts();
-      
+        data.map((product,index) =>{
+            product.thumbnail = BASE_IMAGE_URL + product.thumbnail
+        })
         
         dispatch({type: "PRODUCT_SUCCESS", data: data})
     } catch (error) {
@@ -14,10 +17,10 @@ export const getAllProducts = () => async (dispatch) => {
     }
 };
 
-export const getSingleProduct = (id)  => {
+export const getSingleProduct = ({product,id})  => {
     const singleProduct ={};
     try {
-        const  data  =  useSelector(getAllProducts)
+        const  data  =  product
         
          data.map(product =>{
             if(product.id === id){
@@ -33,4 +36,5 @@ export const getSingleProduct = (id)  => {
     return singleProduct;
 };
 
-export const getAllProducts = (state) => {return state.ProductReducer.ProductData};
+export const getAllProducts = (state) =>{ return state.ProductReducer.ProductData};
+export const getProductStatus = (state) =>{ return state.ProductReducer.loading};

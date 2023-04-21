@@ -1,3 +1,4 @@
+@import "../../App.scss";
 #loginForm {
   max-width: 500px;
   min-width: 300px;
@@ -5,8 +6,9 @@
   width: 30%;
   height: 60%;
   margin: 5% auto;
-  background-color: #ffffff;
+  background-color:white;
   border-radius: 25px;
+  border: 1px solid var(clr-orange);
 }
 
 .headerTitle {
@@ -53,7 +55,7 @@
     align-self: start;
     padding-left: 4.5rem;
     padding-bottom: 0.5rem;
-    color: rgba(187, 187, 187, 0.9);
+    color: rgba(0, 0, 0, 0.9);
   }
 
   button {

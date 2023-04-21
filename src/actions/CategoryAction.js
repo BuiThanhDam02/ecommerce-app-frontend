@@ -1,20 +1,15 @@
 
-import { useSelector } from "react-redux"
-import { getAllProducts } from "./ProductAction"
 
-export const getAllCategories = ()=>{
-    const products = useSelector(getAllProducts);
-    const categories =[]
-     products.map(product =>{
-        
-        if(!categories.includes(product.category)){
-            categories.push(product.category)
-        } 
-    })
-    return categories
+import * as CategoryAPI from "../api/CategoryRequest";
+
+export const getAllCategories = async ()=>{
+    
+    const {data} = await CategoryAPI.getAllCategories();
+     
+    return data
 };
-export const getAllProductsByCategory = (category) => {
-    const products = useSelector(getAllProducts);
+export const getAllProductsByCategory = ({product,category}) => {
+    const products = product;
     const productsByCategory =products.filter(product =>{
         return product.category === category;
     })

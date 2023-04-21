@@ -13,7 +13,7 @@ const Footer = () => {
           <div className='vert-line'></div>
           <Link to = "/" className='text-uppercase'>Giới thiệu về SnapUp.</Link>
         </div>
-        <span className='text-white copyright-text text-manrope fs-14 fw-3'>&copy; 2022 SnapUp. Đã đăng ký Bản quyền.</span>
+        <span className='text-white copyright-text text-manrope fs-14 fw-3'>&copy; 2022 ShoppingNào!. Đã đăng ký Bản quyền.</span>
       </div>
     </footer>
   )

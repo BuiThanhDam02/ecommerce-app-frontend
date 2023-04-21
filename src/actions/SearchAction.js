@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux"
-import { getAllProducts } from "./ProductAction"
 
 
-export const searchProducts = (text)  =>{
+
+export const searchProducts = ({product,text})  =>{
    
-        const products = useSelector(getAllProducts);
+        const products = product;
         const searchProducts = products.filter(product =>{
             return product.includes(text);
         })

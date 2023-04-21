@@ -15,11 +15,11 @@ const Header = () => {
                   {/* dummy links */}
                   <Link to = "/seller">Trung tâm người bán</Link>
                 </li>
-                <li className='vert-line'></li>
-                <li>
-                  {/* dummy links */}
+                {/* <li className='vert-line'></li> */}
+                {/* <li>
+                   dummy links 
                   <Link to = "/download">Tải xuống</Link>
-                </li>
+                </li> */}
                 <li className='vert-line'></li>
                 <li className='flex align-center'>
                   <span className='fs-13'>Theo dõi chúng tôi</span>
@@ -40,15 +40,15 @@ const Header = () => {
             </div>
             <div className='header-cnt-top-r'>
               <ul className='top-links flex align-center'>
-                <li>
+                {/* <li>
                   <Link to = "/" className='top-link-itm'>
                     <span className='top-link-itm-ico mx-2'>
                       <i className='fa-solid fa-circle-question'></i>
                     </span>
                     <span className='top-link-itm-txt'>Hổ trợ</span>
                   </Link>
-                </li>
-                <li className='vert-line'></li>
+                </li> */}
+                {/* <li className='vert-line'></li> */}
                 <li>
                   <Link to = "/">
                     <span className='top-link-itm-txt'>Đăng kí</span>

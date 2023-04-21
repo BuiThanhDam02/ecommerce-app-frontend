@@ -2,11 +2,11 @@ import './App.scss';
 // react router v6
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 // pages
-import { Login} from "./pages/index";
+import { Login,Home} from "./pages/index";
 // components
-// import Header from "./components/Header/Header";
-// import Sidebar from "./components/Sidebar/Sidebar";
-// import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+
+import Footer from "./components/Footer/Footer";
 
 import {Provider} from "react-redux";
 import store from './store/ReduxStore';
@@ -16,12 +16,12 @@ function App() {
     <div className="App">
       <Provider store = {store}>
         <BrowserRouter>
-          {/* <Header />
-          <Sidebar /> */}
+          <Header />
+          {/* <Sidebar /> */}
 
           <Routes>
-        
-            <Route path = "/" element = {<Login />} />
+          <Route path = "/" element = {<Home />} />
+            <Route path = "/login" element = {<Login />} />
            
             {/* <Route path = "/product/:id" element = {<ProductSingle />} />
             
@@ -32,7 +32,7 @@ function App() {
             <Route path = "/search/:searchTerm" element = {<Search />} /> */}
           </Routes>
 
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
       </Provider>
     </div>
