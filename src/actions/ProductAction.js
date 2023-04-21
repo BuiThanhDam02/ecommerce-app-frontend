@@ -17,7 +17,7 @@ export const getAllProducts = () => async (dispatch) => {
 export const getSingleProduct = (id)  => {
     const singleProduct ={};
     try {
-        const  data  =  useSelector((state)=>{return state.ProductData})
+        const  data  =  useSelector(getAllProducts)
         
          data.map(product =>{
             if(product.id === id){
@@ -32,3 +32,5 @@ export const getSingleProduct = (id)  => {
     }
     return singleProduct;
 };
+
+export const getAllProducts = (state) => {return state.ProductReducer.ProductData};
