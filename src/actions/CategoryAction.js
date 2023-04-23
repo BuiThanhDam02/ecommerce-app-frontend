@@ -8,9 +8,12 @@ export const getAllCategories = async ()=>{
      
     return data
 };
-export const getAllProductsByCategory = ({product,category}) => {
-    const products = product;
-    const productsByCategory =products.filter(product =>{
+export const getAllProductsByCategory = ({products,category}) => {
+    let productsByCategory = [];
+   if(category === "all"){
+    productsByCategory = products
+   }else
+    productsByCategory =products.filter(product =>{
         return product.category === category;
     })
    

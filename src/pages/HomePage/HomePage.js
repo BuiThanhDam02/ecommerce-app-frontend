@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./HomePage.scss";
 import HeaderSlider from "../../components/Slider/HeaderSlider";
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,11 +11,11 @@ import { STATUS } from '../../utils/status';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  let categories = [];
+  const [categories,setCategories] = useState([]);
 
   useEffect(() => {
        async function fetchCategories(){
-       categories = await getAllCategories()
+        setCategories(await getAllCategories())
       
      }
      fetchCategories()
@@ -26,7 +26,7 @@ const HomePage = () => {
   const productStatus = useSelector(getProductStatus);
 
   // randomizing the products in the list
-  const tempProducts = [];
+  let tempProducts = [];
   if(products.length > 0){
     for(let i in products){
       let randomIndex = Math.floor(Math.random() * products.length);
@@ -37,11 +37,12 @@ const HomePage = () => {
       tempProducts[i] = products[randomIndex];
     }
   }
+  tempProducts = tempProducts.slice(0,10);
 
-  let catProductsOne = products.filter(product => product.category === categories[0]);
-  let catProductsTwo = products.filter(product => product.category === categories[1]);
-  let catProductsThree = products.filter(product => product.category === categories[2]);
-  let catProductsFour = products.filter(product => product.category === categories[3]);
+  let catProductsOne = products.filter(product => product.category === categories[0]).slice(0,5);
+  let catProductsTwo = products.filter(product => product.category === categories[1]).slice(0,5);
+  let catProductsThree = products.filter(product => product.category === categories[2]).slice(0,5);
+  let catProductsFour = products.filter(product => product.category === categories[3]).slice(0,5);
 
   return (
     <main>

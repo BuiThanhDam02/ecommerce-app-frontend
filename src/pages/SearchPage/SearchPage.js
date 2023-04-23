@@ -1,22 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {Suspense} from 'react';
 import "./SearchPage.scss";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { STATUS } from '../../utils/status';
+import {getAllProducts} from  '../../actions/ProductAction'
 import Loader from '../../components/Loader/Loader';
 import ProductList from '../../components/ProductList/ProductList';
-import { fetchAsyncSearchProduct, getSearchProducts, setSearchTerm, getSearchProductsStatus, clearSearch } from '../../store/searchSlice';
-
+import {getSearchProducts} from '../../actions/SearchAction'
 const SearchPage = () => {
-  const dispatch = useDispatch();
+  
   const {searchTerm } = useParams();
-  const searchProducts = useSelector(getSearchProducts);
-  const searchProductsStatus = useSelector(getSearchProductsStatus);
+  
+  const products = useSelector(getAllProducts)
+  const searchProducts =getSearchProducts({products,searchTerm})
+  
 
-  useEffect(() => {
-    dispatch(clearSearch());
-    dispatch(fetchAsyncSearchProduct(searchTerm));
-  }, [searchTerm]);
+
 
   if(searchProducts.length === 0){
     return (
@@ -24,7 +22,7 @@ const SearchPage = () => {
         minHeight: "70vh"
       }}>
         <div className='fw-5 text-danger py-5'>
-          <h3>No Products found.</h3>
+          <h3>Không tìm thấy sản phẩm nào.</h3>
         </div>
       </div>
     )
@@ -36,12 +34,14 @@ const SearchPage = () => {
         <div className='container'>
           <div className='py-5'>
             <div className='title-md'>
-              <h3>Search results:</h3>
+              <h3>Kết quả tìm kiếm:</h3>
             </div>
             <br />
-            {
-              searchProductsStatus === STATUS.LOADING ? <Loader /> : <ProductList products = {searchProducts} />
-            }
+            <Suspense fallback={<Loader /> }>
+            <ProductList products = {searchProducts} />
+            </Suspense>
+             
+            
           </div>
         </div>
       </div>

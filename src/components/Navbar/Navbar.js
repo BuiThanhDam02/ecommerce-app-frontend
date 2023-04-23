@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import { useSelector, useDispatch} from 'react-redux';
 
 // import { setSidebarOn } from '../../store/sidebarSlice';
-// import { getAllCategories } from '../../actions/CategoryAction';
+import { getAllCategories } from '../../actions/CategoryAction';
 import { getAllCarts, getCartItemsCount, getCartTotal } from '../../actions/CartAction';
 
 import CartModal from "../CartModal/CartModal";
@@ -12,7 +12,7 @@ import CartModal from "../CartModal/CartModal";
 const Navbar = () => {
   const dispatch = useDispatch();
 
-  // let categories =  [];
+  const [categories,setCategories] = useState([]);
   
   const carts = useSelector(getAllCarts);
   const itemsCount = useSelector(getCartItemsCount);
@@ -24,14 +24,14 @@ const Navbar = () => {
     setSearchTerm(e.target.value);
   }
 
-  // useEffect( ()=>{
-  //   async function fetchCategories(){
-  //     categories = await getAllCategories()
+  useEffect( ()=>{
+    async function fetchCategories(){
+      setCategories(await getAllCategories())
       
-  //   }
-  //   fetchCategories()
+    }
+    fetchCategories()
 
-  // },[])
+  },[])
   useEffect(() => {
     dispatch(getCartTotal({carts}));
   }, [carts])
@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
+          <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
             {
               // taking only first 8 categories
               categories.map((category, idx) => (
@@ -72,7 +72,11 @@ const Navbar = () => {
                 </li>
               ))
             }
-          </ul> */}
+
+                <li className='nav-item no-wrap' key = {"all"}>
+                  <Link to = {`category/all`} className='nav-link text-capitalize'>Tất cả</Link>
+                </li>
+          </ul>
         </div>
 
         <div className='navbar-cart flex align-center'>

@@ -2,7 +2,7 @@ import './App.scss';
 // react router v6
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 // pages
-import { Login,Home} from "./pages/index";
+import { Login,Home,CategoryProduct,Search} from "./pages/index";
 // components
 import Header from "./components/Header/Header";
 
@@ -22,14 +22,15 @@ function App() {
           <Routes>
           <Route path = "/" element = {<Home />} />
             <Route path = "/login" element = {<Login />} />
-           
+            <Route path = "/category/:category" element = {<CategoryProduct />} />
+            <Route path = "/search/:searchTerm" element = {<Search />} />
             {/* <Route path = "/product/:id" element = {<ProductSingle />} />
             
-            <Route path = "/category/:category" element = {<CategoryProduct />} />
+            
           
             <Route path = "/cart" element = {<Cart />} />
            
-            <Route path = "/search/:searchTerm" element = {<Search />} /> */}
+            */}
           </Routes>
 
           <Footer />
