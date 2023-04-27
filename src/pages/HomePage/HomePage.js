@@ -7,7 +7,7 @@ import { getAllCategories } from '../../actions/CategoryAction';
 import ProductList from "../../components/ProductList/ProductList";
 import { getAllProductsApi, getAllProducts,getProductStatus } from '../../actions/ProductAction';
 import Loader from "../../components/Loader/Loader";
-import { STATUS } from '../../utils/status';
+
 
 const HomePage = () => {
   const dispatch = useDispatch();

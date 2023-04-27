@@ -58,7 +58,7 @@ const Navbar = () => {
             <div className='flex align-center'>
               <input type = "text" className='form-control fs-14' placeholder='Tìm kiếm sản phẩm tại đây' onChange={(e) => handleSearchTerm(e)} />
               <Link to = {`search/${searchTerm}`} className='text-white search-btn flex align-center justify-center'>
-                  <i className='fa-solid fa-magnifying-glass'>Tìm</i>
+                  <i className='fa-solid fa-magnifying-glass'></i>
                 </Link>
             </div>
           </div>

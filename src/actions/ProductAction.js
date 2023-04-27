@@ -17,10 +17,10 @@ export const getAllProductsApi = () => async (dispatch) => {
     }
 };
 
-export const getSingleProduct = ({product,id})  => {
-    const singleProduct ={};
+export const getSingleProduct = ({products,id})  => {
+    let singleProduct ={};
     try {
-        const  data  =  product
+        const  data  =  products
         
          data.map(product =>{
             if(product.id === id){
