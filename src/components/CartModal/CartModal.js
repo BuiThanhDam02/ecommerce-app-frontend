@@ -24,7 +24,7 @@ const CartModal = ({ carts }) => {
                   {cart?.title}
                 </div>
                 <div className="cart-modal-item-price text-orange fs-14 fw-6">
-                  {formatPrice(cart?.discountedPrice)}
+                  {formatPrice(cart?.price)}
                 </div>
               </div>
             );
