@@ -5,8 +5,17 @@ import { shopping_cart } from '../../utils/images';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../utils/helpers';
 import { getAllCarts, removeFromCart, toggleCartQty, clearCart, getCartTotal } from '../../actions/CartAction';
+// import { data } from '../../data/product';
+// import { categories } from '../../data/category';
+
 
 const CartPage = () => {
+
+// console.log(JSON.stringify(categories) )
+// console.log(JSON.stringify(data) )
+
+
+
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
   useEffect(()=>{
@@ -14,7 +23,7 @@ const CartPage = () => {
     
   },[carts])
   const { itemsCount, totalAmount} = useSelector((state) => state.CartReducer);
-   
+
  
 
   if(carts.length === 0){
@@ -30,6 +39,7 @@ const CartPage = () => {
   }
 
   return (
+    
     <div className='cart bg-whitesmoke'>
       <div className='container'>
         <div className='cart-ctable'>
@@ -52,6 +62,7 @@ const CartPage = () => {
               </div>
               <div className='cart-cth'>
                 <span className='cart-ctxt'>Tính năng</span>
+                
               </div>
             </div>
           </div>
