@@ -31,13 +31,13 @@ const CartModal = ({ carts }) => {
           })}
 
           <div className="text-capitalize view-cart-btn bg-orange fs-15 font-manrope text-center">
-            view my shopping cart
+            Xem giỏ hàng
           </div>
         </div>
       ) : (
         <div className="flex flex-column align-center justify-center cart-modal-empty">
           <img src={shopping_cart} alt="" className="" />
-          <h6 className="text-dark fw-4">No products yet</h6>
+          <h6 className="text-dark fw-4">Chưa có sản phẩm</h6>
         </div>
       )}
     </div>

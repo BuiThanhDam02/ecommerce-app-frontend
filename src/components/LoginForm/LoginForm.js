@@ -3,7 +3,13 @@ import "./LoginForm.scss";
 import { facebook_icon } from "../../utils/images";
 import { google_icon } from "../../utils/images";
 
+
 const LoginFrom = () => {
+
+
+
+
+
   return (
     <form onSubmit={console.log("SignIn")}>
       <div id="loginForm">
