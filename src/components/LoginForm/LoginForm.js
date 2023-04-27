@@ -3,44 +3,117 @@ import "./LoginForm.scss";
 import { facebook_icon } from "../../utils/images";
 import { google_icon } from "../../utils/images";
 
+function LoginFrom() {
+  const [isLogin, setIsLogin] = useState(true);
 
-const LoginFrom = () => {
+  const [userName, setUserName] = useState([]);
+  const [passWord, setPassWord] = useState([]);
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
 
-
-
+  const handleRegister = () => {};
 
   return (
-    <form onSubmit={console.log("SignIn")}>
-      <div id="loginForm">
-        <h2 className="headerTitle">Đăng nhập</h2>
-        <div>
-          <div className="row">
-            <label>Tài khoản</label>
-            <input type="text" placeholder="Nhập tài khoản"></input>
+    <div>
+      {isLogin ? (
+        <form onSubmit={console.log("Đăng nhập")}>
+          <div id="loginForm">
+            <h2 className="headerTitle">Đăng nhập</h2>
+            <div id="login">
+              <div className="row">
+                <label>Tài khoản</label>
+                <input type="text" placeholder="Nhập tài khoản"></input>
+              </div>
+              <div className="row">
+                <label>Mật khẩu</label>
+                <input type="password" placeholder="Nhập mật khẩu"></input>
+              </div>
+              <div className="row" id="buttonSignIn">
+                <button type="submit">Đăng nhập</button>
+              </div>
+              <div className="row nav-link">
+                <label>Chưa có tài khoản</label>
+                <a
+                  onClick={(e) => {
+                    setIsLogin(false);
+                  }}
+                  type="submit"
+                >
+                  Đăng ký
+                </a>
+              </div>
+            </div>
+            <div className="alternativeLogin">
+              <label>Đăng nhập bằng</label>
+              <div className="iconGroup">
+                <a href="#">
+                  <img src={facebook_icon} />
+                </a>
+                <a href="#">
+                  <img src={google_icon} />
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="row">
-            <label>Mật khẩu</label>
-            <input type="password" placeholder="Nhập mật khẩu"></input>
+        </form>
+      ) : (
+        <form onSubmit={console.log("Đăng ký")}>
+          <div id="loginForm">
+            <h2 className="headerTitle">Đăng ký</h2>
+            <div id="login">
+              <div className="row">
+                <label>Tài khoản</label>
+                <input type="text" placeholder="Nhập tài khoản"></input>
+              </div>
+              <div className="row">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email"></input>
+              </div>
+              <div className="row">
+                <label>Số điện thoại</label>
+                <input type="tel" placeholder="Nhập số điện thoại"></input>
+              </div>
+              <div className="row">
+                <label>Mật khẩu</label>
+                <input type="password" placeholder="Nhập mật khẩu"></input>
+              </div>
+              <div className="row">
+                <label>Nhập lại mật khẩu</label>
+                <input type="password" placeholder="Nhập lại mật khẩu"></input>
+              </div>
+              <div className="row" id="buttonSignIn">
+                <button type="submit">Đăng ký</button>
+              </div>
+              <div className="row nav-link">
+                <label>Đã có tài khoản</label>
+                <a
+                  onClick={(e) => {
+                    setIsLogin(true);
+                  }}
+                  type="submit"
+                >
+                  Đăng nhập
+                </a>
+              </div>
+            </div>
+            <div className="alternativeLogin">
+              <label>Đăng nhập bằng</label>
+              <div className="iconGroup">
+                <a href="#">
+                  <img src={facebook_icon} />
+                </a>
+                <a href="#">
+                  <img src={google_icon} />
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="row" id="buttonSignIn">
-            <button type="submit">Đăng nhập</button>
-          </div>
-        </div>
-        <div className="alternativeLogin">
-          <label>Đăng nhập bằng</label>
-          <div className="iconGroup">
-            <a href="#">
-              <img src={facebook_icon} />
-            </a>
-            <a href="#">
-              <img src={google_icon} />
-            </a>
-          </div>
-        </div>
-      </div>
-    </form>
+        </form>
+      )}
+    </div>
   );
-};
+}
 
 export default LoginFrom;
