@@ -3,54 +3,68 @@ import "./LoginForm.scss";
 import { facebook_icon } from "../../utils/images";
 import { google_icon } from "../../utils/images";
 import { checkLogin } from "../../actions/AuthAction";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function LoginFrom({isSignIn}) {
- 
+function LoginFrom({ isSignIn }) {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
-  
-  useEffect(()=>{setIsLogin(isSignIn)},[isSignIn])
-  
-  const [formdata, setFormdata] = useState({
-    username:"",
-    email:"",
-    password:"",
-    age:0,
-    name:""
-  });
- 
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    dispatch(checkLogin({formdata}))
-    
-    
-  
+  useEffect(() => {
+    setIsLogin(isSignIn);
+  }, [isSignIn]);
+
+  const validate = () => {
+    let result = true;
+    if (formdata.username === "" || formdata.username === null) {
+      result = false;
+      toast.warning("Nhập tài khoản");
+    }
+    if (formdata.password === "" || formdata.password === null) {
+      result = false;
+      toast.warning("Nhập mật khẩu");
+    }
+    return result;
   };
 
   const onHandleChange = (e) => {
-      setFormdata(pre => {return{...pre,[e.target.name]:e.target.value}});
-   };
+    setFormdata((pre) => {
+      return { ...pre, [e.target.name]: e.target.value };
+    });
+  };
   const handleRegister = () => {};
 
   return (
     <div>
       {isLogin ? (
-        <form >
+        <form>
           <div id="loginForm">
+            <ToastContainer />
             <h2 className="headerTitle">Đăng nhập</h2>
             <div id="login">
               <div className="row">
                 <label>Tài khoản</label>
-                <input type="text" name="username" onChange={onHandleChange} placeholder="Nhập tài khoản"></input>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={onHandleChange}
+                  placeholder="Nhập tài khoản"
+                ></input>
               </div>
               <div className="row">
                 <label>Mật khẩu</label>
-                <input type="password" name="password" onChange={onHandleChange} placeholder="Nhập mật khẩu"></input>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={onHandleChange}
+                  placeholder="Nhập mật khẩu"
+                ></input>
               </div>
               <div className="row" id="buttonSignIn">
-                <button type="submit" onClick={handleLogin}>Đăng nhập</button>
+                <button type="submit" onClick={handleLogin}>
+                  Đăng nhập
+                </button>
               </div>
               <div className="row nav-link">
                 <label>Chưa có tài khoản</label>
