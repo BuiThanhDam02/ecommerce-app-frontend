@@ -3,7 +3,10 @@ import "./Header.scss";
 import {Link} from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 
+import {useSelector} from "react-redux";
 const Header = () => {
+  const currentUser = useSelector((state)=>{return state.AuthReducer.AuthData});
+
   return (
     <header className='header text-white'>
       <div className='container'>
@@ -40,26 +43,25 @@ const Header = () => {
             </div>
             <div className='header-cnt-top-r'>
               <ul className='top-links flex align-center'>
-                {/* <li>
-                  <Link to = "/" className='top-link-itm'>
-                    <span className='top-link-itm-ico mx-2'>
-                      <i className='fa-solid fa-circle-question'></i>
-                    </span>
-                    <span className='top-link-itm-txt'>Hổ trợ</span>
-                  </Link>
-                </li> */}
-                {/* <li className='vert-line'></li> */}
+     
+                {currentUser?
+             
+                <li>Dăng xuất</li>
+                :   <>
                 <li>
-                  <Link to = "/">
+                  <Link to = "/register">
                     <span className='top-link-itm-txt'>Đăng kí</span>
                   </Link>
                 </li>
                 <li className='vert-line'></li>
                 <li>
-                  <Link to = "/">
+                  <Link to = "/login">
                     <span className='top-link-itm-txt'>Đăng nhập</span>
                   </Link>
                 </li>
+                </>}
+                
+               
               </ul>
             </div>
           </div>
