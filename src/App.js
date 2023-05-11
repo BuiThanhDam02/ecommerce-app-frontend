@@ -30,8 +30,12 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path = "/login" element = {currentUser?<Login isSignIn={true}/>:<Navigate to={'../'}/>} /> */}
-          <Route path="/login" element={<Login isSignIn={true} />} />
+          <Route
+            path="/login"
+            element={
+              currentUser ? <Login isSignIn={true} /> : <Navigate to={"../"} />
+            }
+          />
           <Route
             path="/register"
             element={
