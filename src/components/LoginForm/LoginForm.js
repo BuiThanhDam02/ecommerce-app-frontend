@@ -4,8 +4,6 @@ import { facebook_icon } from "../../utils/images";
 import { google_icon } from "../../utils/images";
 import { checkLogin } from "../../actions/AuthAction";
 import { useSelector, useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function LoginFrom({ isSignIn }) {
   const dispatch = useDispatch();
@@ -15,17 +13,17 @@ function LoginFrom({ isSignIn }) {
     setIsLogin(isSignIn);
   }, [isSignIn]);
 
-  const validate = () => {
-    let result = true;
-    if (formdata.username === "" || formdata.username === null) {
-      result = false;
-      toast.warning("Nhập tài khoản");
-    }
-    if (formdata.password === "" || formdata.password === null) {
-      result = false;
-      toast.warning("Nhập mật khẩu");
-    }
-    return result;
+  const [formdata, setFormdata] = useState({
+    username: "",
+    email: "",
+    password: "",
+    age: 0,
+    name: "",
+  });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(checkLogin({ formdata }));
   };
 
   const onHandleChange = (e) => {
@@ -40,7 +38,6 @@ function LoginFrom({ isSignIn }) {
       {isLogin ? (
         <form>
           <div id="loginForm">
-            <ToastContainer />
             <h2 className="headerTitle">Đăng nhập</h2>
             <div id="login">
               <div className="row">
