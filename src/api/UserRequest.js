@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { BASE_URL } from '../utils/apiURL';
+import axios from "axios";
+import { BASE_URL } from "../utils/apiURL";
 
+const API = axios.create({ baseURL: BASE_URL });
 
-const API = axios.create({baseURL: BASE_URL});
-
-
-export const getAllUsers= () => {return API.get('/users')};
+export const getAllUsers = () => {
+  return API.get("/users");
+};
