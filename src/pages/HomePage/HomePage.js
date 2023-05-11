@@ -16,12 +16,13 @@ const HomePage = () => {
   useEffect(() => {
        async function fetchCategories(){
         setCategories(await getAllCategories())
-      
+       
      }
      fetchCategories()
-    dispatch(getAllProductsApi());
+     dispatch(getAllProductsApi());
+    
   }, []);
-
+  
   const products = useSelector(getAllProducts);
   const productStatus = useSelector(getProductStatus);
 
