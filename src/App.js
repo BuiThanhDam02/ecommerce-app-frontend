@@ -1,6 +1,6 @@
 import './App.scss';
 // react router v6
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 // pages
 import { Login,Home,CategoryProduct,Search,ProductSingle,Cart} from "./pages/index";
 // components
@@ -8,20 +8,25 @@ import Header from "./components/Header/Header";
 
 import Footer from "./components/Footer/Footer";
 
-import {Provider} from "react-redux";
-import store from './store/ReduxStore';
+import {useSelector} from "react-redux";
+
 
 function App() {
+
+  const currentUser = useSelector((state)=>{return state.AuthReducer.AuthData});
+  
+
   return (
     <div className="App">
-      <Provider store = {store}>
+      
         <BrowserRouter>
           <Header />
           {/* <Sidebar /> */}
 
           <Routes>
           <Route path = "/" element = {<Home />} />
-            <Route path = "/login" element = {<Login />} />
+            <Route path = "/login" element = {currentUser?<Login isSignIn={true}/>:<Navigate to={'../'}/>} />
+            <Route path = "/register" element = {currentUser?<Login isSignIn={false}/>:<Navigate to={'../'}/>}  />
             <Route path = "/category/:category" element = {<CategoryProduct />} />
             <Route path = "/search/:searchTerm" element = {<Search />} />
             <Route path = "/product/:id" element = {<ProductSingle />} />
@@ -32,7 +37,7 @@ function App() {
 
           <Footer />
         </BrowserRouter>
-      </Provider>
+      
     </div>
   );
 }
