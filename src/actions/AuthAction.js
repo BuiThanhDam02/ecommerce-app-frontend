@@ -21,6 +21,7 @@ export const checkLogin =
           }
         });
         if (currentUser) {
+          window.location.href = "/";
           dispatch({ type: "LOGIN_SUCCESS", data: currentUser });
         } else {
           dispatch({ type: "LOGIN_FAIL" });
