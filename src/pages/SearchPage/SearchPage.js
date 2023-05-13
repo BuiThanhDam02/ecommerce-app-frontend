@@ -38,7 +38,7 @@ const SearchPage = () => {
             </div>
             <br />
             <Suspense fallback={<Loader /> }>
-            <ProductList products = {searchProducts} />
+            <ProductList productList = {searchProducts} />
             </Suspense>
              
             
