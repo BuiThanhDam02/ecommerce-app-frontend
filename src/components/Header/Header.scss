@@ -1,20 +1,79 @@
 @import "../../App.scss";
 
-.header{
-    background: rgb(249,78,48);
-    background: linear-gradient(180deg, rgba(249,78,48,1) 0%, rgba(255,100,51,1) 100%);
+.header {
+  background: rgb(249, 78, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(249, 78, 48, 1) 0%,
+    rgba(255, 100, 51, 1) 100%
+  );
 
-    .header-cnt-top{
-        border-bottom: 1px solid lighten($clr-orange, 10%);
-    }
+  .header-cnt-top {
+    border-bottom: 1px solid lighten($clr-orange, 10%);
+  }
 
-    @media screen and (max-width: 992px){
-        .header-cnt-top{
-            flex-direction: column;
-            .header-cnt-top-l{
-                margin-bottom: 4px;
-            }
-        }
+  @media screen and (max-width: 992px) {
+    .header-cnt-top {
+      flex-direction: column;
+      .header-cnt-top-l {
+        margin-bottom: 4px;
+      }
     }
-    
+  }
+  .account-container {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    .shop-avatar {
+      position: relative;
+      background-color: #ffff;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 20px;
+      height: 20px;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+    button,
+    a {
+      color: #000;
+      font-size: 15px;
+      font-weight: 400;
+      &:hover {
+        color: ($clr-light-blue);
+      }
+    }
+    a {
+      p {
+        margin: 5px 0;
+      }
+    }
+    button {
+      margin: 5px 0;
+    }
+  }
+}
+
+.account-dropdown {
+  position: relative;
+  display: inline-block;
+  .account-dropdown__content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px 14px;
+    z-index: 1;
+  }
+}
+
+.account-dropdown:hover .account-dropdown__content {
+  display: block;
 }
