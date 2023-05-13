@@ -13,6 +13,7 @@ const CategoryProductPage = () => {
   const { category } = useParams();
   const products = useSelector(getAllProducts);
   const categoryProducts = getAllProductsByCategory({products,category});
+ 
 
 
   
@@ -26,7 +27,7 @@ const CategoryProductPage = () => {
           </div>
 
           <Suspense fallback={  <Loader />}>
-            <ProductList products = {categoryProducts} />
+            <ProductList productList = {categoryProducts} />
           </Suspense>
             
           
