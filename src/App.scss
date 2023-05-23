@@ -28,6 +28,18 @@ $transition-ease: all 300ms ease-in-out;
 html {
   font-size: 10px;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.profile {
+  height: 80vh;
+}
+
 body {
   font-size: 1.6rem;
   line-height: 1.6;

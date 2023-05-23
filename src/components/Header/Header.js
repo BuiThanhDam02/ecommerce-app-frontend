@@ -58,10 +58,16 @@ const Header = () => {
                       <div className="account-dropdown">
                         {currentUser.name}
                         <div className="account-dropdown__content">
-                          <Link className="account-dropdown__item">
+                          <Link
+                            to="/profile"
+                            className="account-dropdown__item"
+                          >
                             <p>Tài khoản của tôi</p>
                           </Link>
-                          <Link className="account-dropdown__item">
+                          <Link
+                            to="/profile/order"
+                            className="account-dropdown__item"
+                          >
                             <p>Đơn mua</p>
                           </Link>
                           <button

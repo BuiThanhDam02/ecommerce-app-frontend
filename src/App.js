@@ -9,13 +9,13 @@ import {
   Search,
   ProductSingle,
   Cart,
-  Profile,
+  ProfilePage,
 } from "./pages/index";
 // components
 import Header from "./components/Header/Header";
 
 import Footer from "./components/Footer/Footer";
-
+import UserLayout from "./components/User/layout/UserLayout";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -41,8 +41,6 @@ function App() {
               )
             }
           />
-
-          {/* <Route path="/login" element={<Login isSignIn={true} />} /> */}
           <Route
             path="/register"
             element={
@@ -54,7 +52,26 @@ function App() {
             }
           />
           <Route path="/category/:category" element={<CategoryProduct />} />
-          <Route path="/profile" element={<Profile />} />
+          {/* <Route
+            path="/profile"
+            element={
+              currentUser === null ? (
+                <Login isSignIn={false} />
+              ) : (
+                <ProfilePage />
+              )
+            }
+          /> */}
+          <Route
+            path="/profile/*"
+            element={
+              currentUser ? (
+                <UserLayout></UserLayout>
+              ) : (
+                <Navigate to="/login" replace={true} />
+              )
+            }
+          />
           <Route path="/search/:searchTerm" element={<Search />} />
           <Route path="/product/:id" element={<ProductSingle />} />
 
