@@ -2,7 +2,6 @@ import * as CategoryAPI from "../api/CategoryRequest";
 
 export const getAllCategories = async () => {
   const { data } = await CategoryAPI.getAllCategories();
-
   return data;
 };
 export const getAllProductsByCategory = ({ products, category }) => {

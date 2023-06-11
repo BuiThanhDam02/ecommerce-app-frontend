@@ -26,9 +26,7 @@ const CheckoutPage = () => {
 
   const [showForm, setShowForm] = useState(false);
 
-  const [address, setAddress] = useState(
-    "Tp HCM, Việt Nam, Trái Đất (Vũ trụ 616)"
-  );
+  const [address, setAddress] = useState(currentUser.address);
 
   const handleButtonClick = () => {
     setShowForm(true);
@@ -68,6 +66,10 @@ const CheckoutPage = () => {
       </div>
     );
   }
+
+  const handleChangeAddress = () => {
+    currentUser.address = address;
+  };
 
   return (
     <div className="cart bg-whitesmoke">
@@ -202,7 +204,11 @@ const CheckoutPage = () => {
                   onChange={(event) => setAddress(event.target.value)}
                 />
               </label>
-              <button className="my-button" type="submit">
+              <button
+                className="my-button"
+                type="submit"
+                onClick={() => handleChangeAddress()}
+              >
                 Xác nhận
               </button>
             </form>

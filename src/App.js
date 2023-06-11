@@ -34,7 +34,7 @@ function App() {
           <Route
             path="/login"
             element={
-              currentUser === null ? (
+              currentUser === undefined ? (
                 <Login isSignIn={true} />
               ) : (
                 <Navigate to={"../"} />
@@ -44,7 +44,7 @@ function App() {
           <Route
             path="/register"
             element={
-              currentUser === null ? (
+              currentUser === undefined ? (
                 <Login isSignIn={false} />
               ) : (
                 <Navigate to={"../"} />
