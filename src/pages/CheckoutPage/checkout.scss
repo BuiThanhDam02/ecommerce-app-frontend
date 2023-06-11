@@ -1,8 +1,75 @@
 @import "../../App.scss";
 
-.text-center {
-  text-align: center;
+.wrapper {
+  display: inline-flex;
+  background: #fff;
+  height: 100px;
+  width: 540px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 20px 15px;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
 }
+.wrapper .option {
+  background: #fff;
+  height: 50px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+
+input[type="radio"] {
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2 {
+  border-color: $clr-orange;
+  color: $clr-orange;
+}
+
+.my-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.ml-15 {
+  margin-left: 15px;
+}
+.my-form {
+  background-color: $clr-white;
+  border: 2px solid $clr-orange;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.my-button {
+  background-color: $clr-orange; /* Màu cam */
+  color: white;
+  padding: 10px 20px;
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background-color: $clr-orange; /* Màu cam nhạt */
+}
+.orange {
+  color: $clr-orange;
+}
+
 .empty-cart {
   min-height: 60vh;
   img {
@@ -20,6 +87,10 @@
       color: $clr-orange;
     }
   }
+}
+
+.mr-24 {
+  margin-right: 33px !important;
 }
 
 .cart {

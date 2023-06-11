@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import "./CartPage.scss";
+import React, { useEffect, useState } from "react";
+import "./checkout.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { shopping_cart } from "../../utils/images";
 import { Link } from "react-router-dom";
@@ -8,16 +8,14 @@ import {
   getAllCarts,
   removeFromCart,
   toggleCartQty,
-  clearCart,
   getCartTotal,
+  clearCart,
 } from "../../actions/CartAction";
-import Checkout from "../CheckoutPage/CheckoutPage";
-// import { data } from '../../data/product';
-// import { categories } from '../../data/category';
 
-const CartPage = () => {
-  // console.log(JSON.stringify(categories) )
-  // console.log(JSON.stringify(data) )
+const CheckoutPage = () => {
+  const currentUser = useSelector((state) => {
+    return state.AuthReducer.AuthData;
+  });
 
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
@@ -25,6 +23,33 @@ const CartPage = () => {
     dispatch(getCartTotal({ carts }));
   }, [carts]);
   const { itemsCount, totalAmount } = useSelector((state) => state.CartReducer);
+
+  const [showForm, setShowForm] = useState(false);
+
+  const [address, setAddress] = useState(currentUser.address);
+
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setShowForm(false);
+  };
+
+  const [selectPayment, setSelectPayment] = useState("option1");
+  const handleSelectChange = (event) => {
+    setSelectPayment(event.target.value);
+  };
+
+  const checkout = () => {
+    dispatch(clearCart());
+    window.location.href = "/";
+  };
+
+  if (currentUser === null) {
+    return;
+  }
 
   if (carts.length === 0) {
     return (
@@ -41,6 +66,10 @@ const CartPage = () => {
       </div>
     );
   }
+
+  const handleChangeAddress = () => {
+    currentUser.address = address;
+  };
 
   return (
     <div className="cart bg-whitesmoke">
@@ -146,16 +175,77 @@ const CartPage = () => {
             })}
           </div>
 
+          <div className="cart-cfoot-r flex flex-column ml-15">
+            <div className="total-txt flex align-center ">
+              <div className="font-manrope fw-5 orange">
+                <i className="fa fa-map-marker" aria-hidden="true"></i>
+                <span> Địa chỉ nhận hàng</span>
+              </div>
+            </div>
+            <div className="total-txt flex align-center">
+              <div className="font-manrope fw-6 ">
+                {currentUser.name != null ? currentUser.name : ""}
+              </div>
+              <span className=" mx-2 fw-4">{address}</span>
+
+              <button className="fw-3 orange" onClick={handleButtonClick}>
+                thay đổi
+              </button>
+            </div>
+          </div>
+          {showForm && (
+            <form className="my-form" onSubmit={handleFormSubmit}>
+              <label>
+                Địa chỉ:
+                <input
+                  className="my-input"
+                  type="text"
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
+                />
+              </label>
+              <button
+                className="my-button"
+                type="submit"
+                onClick={() => handleChangeAddress()}
+              >
+                Xác nhận
+              </button>
+            </form>
+          )}
           <div className="cart-cfoot flex align-start justify-between py-3 bg-white">
             <div className="cart-cfoot-l">
-              <button
-                type="button"
-                className="clear-cart-btn text-danger fs-15 text-uppercase fw-4"
-                onClick={() => dispatch(clearCart())}
-              >
-                <i className="fas fa-trash"></i>
-                <span className="mx-1">Xóa tất cả</span>
-              </button>
+              <div className="total-txt flex align-center justify-end">
+                <div className="font-manrope fw-5 mr-24">
+                  Phương thức thanh toán
+                </div>
+                <div className="wrapper">
+                  <input
+                    type="radio"
+                    id="option-1"
+                    value="option1"
+                    className="square-input "
+                    checked={selectPayment === "option1"}
+                    onChange={handleSelectChange}
+                  />
+
+                  <input
+                    id="option-2"
+                    type="radio"
+                    value="option2"
+                    className="square-input "
+                    checked={selectPayment === "option2"}
+                    onChange={handleSelectChange}
+                  />
+                  <label className="option option-1" htmlFor="option-1">
+                    Thanh toán khi nhận hàng
+                  </label>
+
+                  <label className="option option-2" htmlFor="option-2">
+                    VISA
+                  </label>
+                </div>
+              </div>
             </div>
 
             <div className="cart-cfoot-r flex flex-column justify-end">
@@ -167,14 +257,26 @@ const CartPage = () => {
                   {formatPrice(totalAmount)}
                 </span>
               </div>
+              <div className="total-txt flex align-center justify-end">
+                <div className="font-manrope fw-5">Phí vận chuyển</div>
+                <span className="text-orange fs-22 mx-2 fw-6">
+                  {formatPrice(15000)}
+                </span>
+              </div>
+              <div className="total-txt flex align-center justify-end">
+                <div className="font-manrope fw-5">Tổng thanh toán</div>
+                <span className="text-orange fs-22 mx-2 fw-6">
+                  {formatPrice(totalAmount + 15000)}
+                </span>
+              </div>
 
-              <Link
-                to="/checkout"
+              <button
                 type="button"
-                className="checkout-btn text-white bg-orange fs-16 text-center"
+                className="checkout-btn text-white bg-orange fs-16"
+                onClick={checkout}
               >
                 Thanh toán
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -183,4 +285,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default CheckoutPage;

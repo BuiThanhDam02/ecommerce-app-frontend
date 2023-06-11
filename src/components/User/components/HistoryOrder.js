@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.scss";
 import { useSelector } from "react-redux";
+import { getAllHistoryOrder } from "../../../actions/HistoryOrderAction";
 
 const purchaseTabs = [
   { id: 1, name: "Tất cả" },
@@ -13,12 +14,52 @@ const purchaseTabs = [
 ];
 
 const Order = () => {
-  const cart = useSelector((state) => {
-    return state.CartReducer.CartData;
+  const [order, setOrder] = useState([]);
+  const [allOrder, setAllOrder] = useState([]);
+  const [isActive, setIsActive] = useState(purchaseTabs[0].name);
+  const currentUser = useSelector((state) => {
+    return state.AuthReducer.AuthData;
   });
+
+  useEffect(() => {
+    async function fetchHitoryOrder() {
+      const historyorder = await getAllHistoryOrder();
+      setOrder(
+        historyorder.filter((item) => {
+          return item.username === currentUser.username;
+        })
+      );
+      setAllOrder(
+        historyorder.filter((item) => {
+          return item.username === currentUser.username;
+        })
+      );
+    }
+    fetchHitoryOrder();
+  }, []);
+  const handlePurchaseLinkClick = (status) => {
+    if (status === purchaseTabs[0].name) {
+      setOrder(allOrder);
+      setIsActive(purchaseTabs[0].name);
+    } else {
+      setOrder(
+        allOrder.filter((item) => {
+          return item.status === status;
+        })
+      );
+      setIsActive(status);
+    }
+  };
   const purchaseLink = purchaseTabs.map((tab) => {
     return (
-      <Link key={tab.id} className="purchaseLink">
+      <Link
+        key={tab.id}
+        className={
+          isActive === tab.name ? "purchaseLink active" : "purchaseLink"
+        }
+        // className="purchaseLink"
+        onClick={() => handlePurchaseLinkClick(tab.name)}
+      >
         {tab.name}
       </Link>
     );
@@ -26,12 +67,11 @@ const Order = () => {
 
   return (
     <div>
-      {console.log(cart)}
       <div className="history-order">
         <div className="order-tabs">
           <div className="order-tab__content">{purchaseLink}</div>
           <div>
-            {cart?.map((item) => (
+            {order?.map((item) => (
               <div key={item.id} className="order-item">
                 <Link className="item_link">
                   <div className="flex-shrink-0">
@@ -47,6 +87,8 @@ const Order = () => {
                   </div>
                   <div className="item__price">
                     <span className="price truncate">{item.price} đ</span>
+                    <br />
+                    <span className="price truncate">{item.status}</span>
                   </div>
                 </Link>
                 <div className="item-total">

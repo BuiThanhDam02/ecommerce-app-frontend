@@ -92,6 +92,7 @@
 
 .item__content > input {
   padding-top: 5px;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -304,4 +305,8 @@
   color: #f05d40;
   margin-left: 16px;
   font-size: 18px;
+}
+
+.active {
+  color: orange;
 }

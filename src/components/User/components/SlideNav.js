@@ -43,7 +43,6 @@ const SlideNav = () => {
       <div className="mt-7">
         <Link
           to="/profile"
-          //  className="profile_myaccount"
           className={
             isActive === ""
               ? "profile_myaccount active_slidenav"
@@ -81,7 +80,6 @@ const SlideNav = () => {
         </Link>
         <Link
           to="/profile/order"
-          //  className="profile_myaccount item"
           className={
             isActive === "order"
               ? "profile_myaccount item active_slidenav"

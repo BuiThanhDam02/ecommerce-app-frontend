@@ -48,7 +48,19 @@ function LoginFrom({ isSignIn }) {
       return { ...pre, [e.target.name]: e.target.value };
     });
   };
-  const handleRegister = () => {};
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (formdata.username != null || formdata.username != "") {
+      if (formdata.username === "user1" || formdata.username === "user2") {
+        toast.warning("Tên đăng nhập đã tồn tại");
+      } else {
+        toast.success("Đăng ký thành công");
+        setTimeout(() => {
+          window.location = "/login";
+        }, 5000);
+      }
+    }
+  };
 
   return (
     <div>
@@ -109,11 +121,17 @@ function LoginFrom({ isSignIn }) {
       ) : (
         <form>
           <div id="loginForm">
+            <ToastContainer />
             <h2 className="headerTitle">Đăng ký</h2>
             <div id="login">
               <div className="row">
                 <label>Tài khoản</label>
-                <input type="text" placeholder="Nhập tài khoản"></input>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={onHandleChange}
+                  placeholder="Nhập tài khoản"
+                ></input>
               </div>
               <div className="row">
                 <label>Email</label>
@@ -132,7 +150,9 @@ function LoginFrom({ isSignIn }) {
                 <input type="password" placeholder="Nhập lại mật khẩu"></input>
               </div>
               <div className="row" id="buttonSignIn">
-                <button type="submit">Đăng ký</button>
+                <button type="submit" onClick={handleRegister}>
+                  Đăng ký
+                </button>
               </div>
               <div className="row nav-link">
                 <label>Đã có tài khoản</label>
