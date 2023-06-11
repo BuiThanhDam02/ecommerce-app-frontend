@@ -9,7 +9,7 @@ import {
   Search,
   ProductSingle,
   Cart,
-  ProfilePage,
+  Checkout,
 } from "./pages/index";
 // components
 import Header from "./components/Header/Header";
@@ -76,6 +76,7 @@ function App() {
           <Route path="/product/:id" element={<ProductSingle />} />
 
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
 
         <Footer />

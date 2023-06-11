@@ -9,7 +9,6 @@ import google_icon from "../assets/images/google.svg";
 const sliderImgs = [slider_img_1, slider_img_2];
 export {
   sliderImgs,
-  
   shopping_cart,
   correct,
   loader,
