@@ -24,7 +24,6 @@ export const checkLogin =
           }
         });
         if (currentUser) {
-          
           dispatch({ type: "LOGIN_SUCCESS", data: currentUser });
           window.location.href = "/";
         } else {
@@ -38,6 +37,6 @@ export const checkLogin =
   };
 
 export const logOut = () => async (dispatch) => {
-  console.log("Đăng xuất");
-  dispatch({ type: "LOGOUT", data: null });
+  dispatch({ type: "LOGOUT" });
+  window.location.href = "/login";
 };
