@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { shopping_cart } from "../../utils/images";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/helpers";
+
 import {
   getAllCarts,
   removeFromCart,
@@ -11,14 +12,18 @@ import {
   getCartTotal,
   clearCart,
 } from "../../actions/CartAction";
+import { doCheckout } from "../../actions/CheckoutAction";
 
 const CheckoutPage = () => {
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
 
+  
   const dispatch = useDispatch();
+
   const carts = useSelector(getAllCarts);
+
   useEffect(() => {
     dispatch(getCartTotal({ carts }));
   }, [carts]);
@@ -43,6 +48,7 @@ const CheckoutPage = () => {
   };
 
   const checkout = () => {
+    dispatch(doCheckout({carts}));
     dispatch(clearCart());
     window.location.href = "/";
   };
@@ -99,7 +105,8 @@ const CheckoutPage = () => {
           </div>
 
           <div className="cart-cbody bg-white">
-            {carts.map((cart, idx) => {
+            {       
+            carts.map((cart, idx) => {
               return (
                 <div className="cart-ctr py-4" key={cart?.id}>
                   <div className="cart-ctd">
@@ -172,7 +179,9 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               );
-            })}
+            })
+          
+            }
           </div>
 
           <div className="cart-cfoot-r flex flex-column ml-15">

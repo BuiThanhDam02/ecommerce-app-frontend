@@ -20,7 +20,7 @@ const Order = () => {
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
-
+  const checkoutData = useSelector((state) => { return state.CheckoutReducer.CheckoutData})
   useEffect(() => {
     async function fetchHitoryOrder() {
       const historyorder = await getAllHistoryOrder();
@@ -34,6 +34,10 @@ const Order = () => {
           return item.username === currentUser.username;
         })
       );
+      if(checkoutData.length >0 && checkoutData !==null){
+        setOrder((pre) => {return [...checkoutData,...pre]})
+        setAllOrder((pre) => {return [...checkoutData,...pre]})
+      }
     }
     fetchHitoryOrder();
   }, []);
