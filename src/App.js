@@ -23,6 +23,7 @@ function App() {
     return state.AuthReducer.AuthData;
   });
 
+  console.log(currentUser);
   return (
     <div className="App">
       <BrowserRouter>
@@ -34,7 +35,7 @@ function App() {
           <Route
             path="/login"
             element={
-              currentUser === undefined ? (
+              currentUser === undefined || currentUser === null ? (
                 <Login isSignIn={true} />
               ) : (
                 <Navigate to={"../"} />
@@ -44,7 +45,7 @@ function App() {
           <Route
             path="/register"
             element={
-              currentUser === undefined ? (
+              currentUser === undefined || currentUser === null ? (
                 <Login isSignIn={false} />
               ) : (
                 <Navigate to={"../"} />

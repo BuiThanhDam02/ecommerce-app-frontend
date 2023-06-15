@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { shopping_cart } from "../../utils/images";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/helpers";
+import { ToastContainer, toast } from "react-toastify";
 import {
   getAllCarts,
   removeFromCart,
@@ -11,13 +12,11 @@ import {
   clearCart,
   getCartTotal,
 } from "../../actions/CartAction";
-import Checkout from "../CheckoutPage/CheckoutPage";
-// import { data } from '../../data/product';
-// import { categories } from '../../data/category';
 
 const CartPage = () => {
-  // console.log(JSON.stringify(categories) )
-  // console.log(JSON.stringify(data) )
+  const currentUser = useSelector((state) => {
+    return state.AuthReducer.AuthData;
+  });
 
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
@@ -42,9 +41,18 @@ const CartPage = () => {
     );
   }
 
+  const handleCheckoutClick = () => {
+    if (currentUser != null) {
+      window.location.pathname = "/checkout";
+    } else {
+      toast.warning("Vui lòng đăng nhập");
+    }
+  };
+
   return (
     <div className="cart bg-whitesmoke">
       <div className="container">
+        <ToastContainer />
         <div className="cart-ctable">
           <div className="cart-chead bg-white">
             <div className="cart-ctr fw-6 font-manrope fs-15">
@@ -169,7 +177,7 @@ const CartPage = () => {
               </div>
 
               <Link
-                to="/checkout"
+                onClick={handleCheckoutClick}
                 type="button"
                 className="checkout-btn text-white bg-orange fs-16 text-center"
               >
