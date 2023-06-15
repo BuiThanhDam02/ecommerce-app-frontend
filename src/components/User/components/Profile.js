@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Profile.scss";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import { updateUser } from "../../../actions/AuthAction";
 const Profile = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
   const [formdata, setFormdata] = useState({
     name: currentUser.name,
     phone: currentUser.phone,
-    address: currentUser.address,
+    address: currentUser.address === undefined ? "" : currentUser.address,
   });
 
   const onChangeProfile = (e) => {
@@ -18,8 +20,21 @@ const Profile = () => {
     });
   };
 
+  const handleChangeProfile = (e) => {
+    e.preventDefault();
+    // console.log(currentUser);
+    dispatch(updateUser({ formdata }));
+    toast.success("Cập nhật thông tin thành công");
+    // console.log(currentUser);
+    // console.log(formdata);
+    setTimeout(() => {
+      window.location = "/profile";
+    }, 5000);
+  };
+
   return (
     <div className="profile-container">
+      <ToastContainer />
       <div className="profile-header">
         <h1 className="header__title">Hồ Sơ Của Tôi</h1>
         <div className="header__content">
@@ -73,7 +88,7 @@ const Profile = () => {
           </div>
           <div className="profile-form__item item-input">
             <div className="item-btn__save">
-              <button className="btn__save" type="submit">
+              <button className="btn__save" onClick={handleChangeProfile}>
                 Lưu
               </button>
             </div>

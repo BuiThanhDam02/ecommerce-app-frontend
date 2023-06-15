@@ -40,3 +40,9 @@ export const logOut = () => async (dispatch) => {
   dispatch({ type: "LOGOUT" });
   window.location.href = "/login";
 };
+
+export const updateUser =
+  ({ formdata }) =>
+  async (dispatch) => {
+    dispatch({ type: "UPDATE", data: formdata });
+  };
