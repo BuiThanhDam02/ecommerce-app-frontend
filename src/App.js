@@ -18,13 +18,11 @@ import Footer from "./components/Footer/Footer";
 import UserLayout from "./components/User/layout/UserLayout";
 import { useSelector } from "react-redux";
 
-
 function App() {
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
- 
-  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -54,16 +52,6 @@ function App() {
             }
           />
           <Route path="/category/:category" element={<CategoryProduct />} />
-          {/* <Route
-            path="/profile"
-            element={
-              currentUser === null ? (
-                <Login isSignIn={false} />
-              ) : (
-                <ProfilePage />
-              )
-            }
-          /> */}
           <Route
             path="/profile/*"
             element={
