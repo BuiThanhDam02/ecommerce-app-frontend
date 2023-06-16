@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Profile.scss";
 import { useSelector } from "react-redux";
 import { getAllHistoryOrder } from "../../../actions/HistoryOrderAction";
+import { formatPrice } from "../../../utils/helpers";
 
 const purchaseTabs = [
   { id: 1, name: "Tất cả" },
@@ -20,7 +21,9 @@ const Order = () => {
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
-  const checkoutData = useSelector((state) => { return state.CheckoutReducer.CheckoutData})
+  const checkoutData = useSelector((state) => {
+    return state.CheckoutReducer.CheckoutData;
+  });
   useEffect(() => {
     async function fetchHitoryOrder() {
       const historyorder = await getAllHistoryOrder();
@@ -34,9 +37,13 @@ const Order = () => {
           return item.username === currentUser.username;
         })
       );
-      if(checkoutData.length >0 && checkoutData !==null){
-        setOrder((pre) => {return [...checkoutData,...pre]})
-        setAllOrder((pre) => {return [...checkoutData,...pre]})
+      if (checkoutData.length > 0 && checkoutData !== null) {
+        setOrder((pre) => {
+          return [...checkoutData, ...pre];
+        });
+        setAllOrder((pre) => {
+          return [...checkoutData, ...pre];
+        });
       }
     }
     fetchHitoryOrder();
@@ -90,7 +97,9 @@ const Order = () => {
                     <div className="mt-3">x{item.quantity}</div>
                   </div>
                   <div className="item__price">
-                    <span className="price truncate">{item.price} đ</span>
+                    <span className="price truncate">
+                      {formatPrice(item.price)}
+                    </span>
                     <br />
                     <span className="price truncate">{item.status}</span>
                   </div>
@@ -98,7 +107,9 @@ const Order = () => {
                 <div className="item-total">
                   <div>
                     <span>Tổng giá tiền</span>
-                    <span className="totalprice">{item.totalPrice} đ</span>
+                    <span className="totalprice">
+                      {formatPrice(item.totalPrice)}{" "}
+                    </span>
                   </div>
                 </div>
               </div>
