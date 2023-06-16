@@ -23,7 +23,6 @@ function App() {
     return state.AuthReducer.AuthData;
   });
 
-  console.log(currentUser);
   return (
     <div className="App">
       <BrowserRouter>
@@ -53,16 +52,6 @@ function App() {
             }
           />
           <Route path="/category/:category" element={<CategoryProduct />} />
-          {/* <Route
-            path="/profile"
-            element={
-              currentUser === null ? (
-                <Login isSignIn={false} />
-              ) : (
-                <ProfilePage />
-              )
-            }
-          /> */}
           <Route
             path="/profile/*"
             element={
