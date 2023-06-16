@@ -1,6 +1,6 @@
 import React, {Suspense, useEffect, useState} from 'react';
 import "./ProductSinglePage.scss";
-import {useParams} from "react-router-dom";
+import {json, useParams} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {  getSingleProduct, getAllProducts } from '../../actions/ProductAction';
 
@@ -60,6 +60,15 @@ const ProductSinglePage = () => {
     dispatch(setCartMessageOn());
   }
 
+  const OnHandleBuyNow =()=>{
+    let bnp = product;
+    let totalPrice = quantity * bnp?.price;
+    
+    bnp.quantity = quantity
+    bnp.totalPrice= totalPrice
+    sessionStorage.setItem("BuyNowProduct",JSON.stringify(bnp));
+    window.location.pathname = '/checkout';
+  }
 
   return (
     <main className='py-5 bg-whitesmoke'>
@@ -125,7 +134,7 @@ const ProductSinglePage = () => {
                     <i className='fas fa-shopping-cart'></i>
                     <span className='btn-text mx-2' onClick={() => { addToCartHandler(product)}}>Thêm vào giỏ hàng</span>
                   </button>
-                  <button type = "button" className='buy-now btn mx-3'>
+                  <button type = "button" className='buy-now btn mx-3' onClick={OnHandleBuyNow}>
                     <span className='btn-text'>Mua ngay</span>
                   </button>
                 </div>

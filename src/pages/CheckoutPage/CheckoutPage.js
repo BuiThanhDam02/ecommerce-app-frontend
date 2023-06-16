@@ -7,8 +7,6 @@ import { formatPrice } from "../../utils/helpers";
 
 import {
   getAllCarts,
-  removeFromCart,
-  toggleCartQty,
   getCartTotal,
   clearCart,
 } from "../../actions/CartAction";
@@ -22,8 +20,23 @@ const CheckoutPage = () => {
   
   const dispatch = useDispatch();
 
-  const carts = useSelector(getAllCarts);
+  
 
+  const checkoutProducts = useSelector(getAllCarts);
+  const [carts,setCarts] = useState(
+    JSON.parse(sessionStorage.getItem('BuyNowProduct'))
+    ?[JSON.parse(sessionStorage.getItem('BuyNowProduct'))]
+    :checkoutProducts);
+
+
+
+useEffect(()=>{
+
+  return ()=>{
+    sessionStorage.removeItem('BuyNowProduct');
+    console.log('Checkout unmoutned')
+  }
+},[])
   useEffect(() => {
     dispatch(getCartTotal({ carts }));
   }, [carts]);
@@ -98,9 +111,7 @@ const CheckoutPage = () => {
               <div className="cart-cth">
                 <span className="cart-ctxt">Tổng giá</span>
               </div>
-              <div className="cart-cth">
-                <span className="cart-ctxt">Tính năng</span>
-              </div>
+              
             </div>
           </div>
 
@@ -122,41 +133,11 @@ const CheckoutPage = () => {
                   </div>
                   <div className="cart-ctd">
                     <div className="qty-change flex align-center">
-                      <button
-                        type="button"
-                        className="qty-decrease flex align-center justify-center"
-                        onClick={() =>
-                          dispatch(
-                            toggleCartQty({
-                              productId: cart?.id,
-                              type: "DEC",
-                              carts,
-                            })
-                          )
-                        }
-                      >
-                        <i className="fas fa-minus"></i>
-                      </button>
 
                       <div className="qty-value flex align-center justify-center">
                         {cart?.quantity}
                       </div>
-
-                      <button
-                        type="button"
-                        className="qty-increase flex align-center justify-center"
-                        onClick={() =>
-                          dispatch(
-                            toggleCartQty({
-                              productId: cart?.id,
-                              type: "INC",
-                              carts,
-                            })
-                          )
-                        }
-                      >
-                        <i className="fas fa-plus"></i>
-                      </button>
+                     
                     </div>
                   </div>
 
@@ -166,17 +147,7 @@ const CheckoutPage = () => {
                     </span>
                   </div>
 
-                  <div className="cart-ctd">
-                    <button
-                      type="button"
-                      className="delete-btn text-dark"
-                      onClick={() =>
-                        dispatch(removeFromCart({ productID: cart?.id, carts }))
-                      }
-                    >
-                      Xóa khỏi giỏ hàng
-                    </button>
-                  </div>
+                  
                 </div>
               );
             })
