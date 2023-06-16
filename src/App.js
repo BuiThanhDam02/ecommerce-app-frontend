@@ -18,12 +18,13 @@ import Footer from "./components/Footer/Footer";
 import UserLayout from "./components/User/layout/UserLayout";
 import { useSelector } from "react-redux";
 
+
 function App() {
   const currentUser = useSelector((state) => {
     return state.AuthReducer.AuthData;
   });
-
-  console.log(currentUser);
+ 
+  
   return (
     <div className="App">
       <BrowserRouter>
