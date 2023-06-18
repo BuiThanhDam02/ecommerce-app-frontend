@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // pages
 import {
   Login,
+  ForgotPassword,
   Home,
   CategoryProduct,
   Search,
@@ -46,6 +47,16 @@ function App() {
             element={
               currentUser === undefined || currentUser === null ? (
                 <Login isSignIn={false} />
+              ) : (
+                <Navigate to={"../"} />
+              )
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              currentUser === undefined || currentUser === null ? (
+                <ForgotPassword />
               ) : (
                 <Navigate to={"../"} />
               )

@@ -5,5 +5,15 @@ import ProductSingle from "./ProductSinglePage/ProductSinglePage";
 import Search from "./SearchPage/SearchPage";
 import Login from "./LoginPage/LoginPage";
 import Checkout from "./CheckoutPage/CheckoutPage";
+import ForgotPassword from "./ForgotpwPage/ForgotpwPage";
 
-export { Login, Home, CategoryProduct, Search, ProductSingle, Cart, Checkout };
+export {
+  Login,
+  ForgotPassword,
+  Home,
+  CategoryProduct,
+  Search,
+  ProductSingle,
+  Cart,
+  Checkout,
+};
