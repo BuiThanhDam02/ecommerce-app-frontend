@@ -93,7 +93,10 @@ function LoginFrom({ isSignIn }) {
                   Đăng nhập
                 </button>
               </div>
-              <div className="row nav-link">
+              <div className="row forgotpw">
+                <a href="/reset-password">Quên mật khẩu</a>
+              </div>
+              <div className="row nav-link register">
                 <label>Chưa có tài khoản</label>
                 <a
                   onClick={(e) => {
